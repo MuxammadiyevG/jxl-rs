@@ -50,6 +50,8 @@ default = ["all-simd"]
 
 brotli = ["dep:brotli-decompressor"]
 shuttle = ["dep:shuttle"]
+# Exposes internal modules (e.g. the modular predictor) for benchmarking only.
+bench_internals = []
 
 all-simd = ["jxl_simd/all-simd"]
 sse42 = ["jxl_simd/sse42"]
@@ -64,3 +66,8 @@ workspace = true
 [[bench]]
 name = "blending"
 harness = false
+
+[[bench]]
+name = "modular_predict"
+harness = false
+required-features = ["bench_internals"]

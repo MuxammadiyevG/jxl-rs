@@ -31,7 +31,12 @@ use crate::util::{CeilLog2, PerThreadStorage, PerThreadStorageRef};
 mod buffers;
 mod decode;
 mod flat_tree;
+// The predictor internals are private by default; the `bench_internals` feature exposes them so
+// that benchmarks can measure `WeightedPredictorState` directly. Not part of the public API.
+#[cfg(not(feature = "bench_internals"))]
 mod predict;
+#[cfg(feature = "bench_internals")]
+pub mod predict;
 mod transforms;
 mod tree;
 
